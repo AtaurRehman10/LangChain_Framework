@@ -299,5 +299,3 @@ Deploy:  Docker → GitHub Actions (lint/type/test/eval gate) → AWS (ECR + App
 - Chip Huyen — *AI Engineering* (O'Reilly) for the systems view
 
 ---
-
-*Adjust freely — if a week clicks fast, pull the next one forward; if a concept fights you, give it the extra days. The arc matters more than the calendar.*
