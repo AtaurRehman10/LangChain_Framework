@@ -8,6 +8,7 @@
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import PromptTemplate
+from langchain_core.runnables import RunnableSequence
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -23,9 +24,10 @@ template = PromptTemplate(
      input_variables=["subject"]
      )
 
-chain = template | model 
+# chain = template | model 
 # prompt = template.invoke({"subject": "nature"})
 # response = model.invoke(prompt)
-response = chain.invoke({"subject": "Software Engineering"})
+# response = chain.invoke({"subject": "Software Engineering"})
+response = RunnableSequence(template, model).invoke({"subject": "Software Engineering"})
 
 print(response.text)  
