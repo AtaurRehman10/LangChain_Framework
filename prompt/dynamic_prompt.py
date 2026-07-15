@@ -1,6 +1,8 @@
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_core.prompts import PromptTemplate , load_prompt
+import json
+from pathlib import Path
 
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.prompts import PromptTemplate
 from dotenv import load_dotenv
 import streamlit as st 
 
@@ -21,7 +23,17 @@ style_input = st.selectbox("Select Explanation Style", ["Beginner-Friendly", "Te
 length_input = st.selectbox("Select Explanation Length", ["Short (1-2 paragraphs)", "Medium (3-5 paragraphs)", "Long (detailed explanation)"] )
 
 
-template = load_prompt("template.json")
+template_path = Path(__file__).with_name("template.json")
+
+with template_path.open(encoding="utf-8") as file:
+    template_config = json.load(file)
+
+template = PromptTemplate(
+    input_variables=template_config["input_variables"],
+    template=template_config["template"],
+    template_format=template_config.get("template_format", "f-string"),
+    validate_template=template_config.get("validate_template", False),
+)
 
 if st.button("Generate Summary"):
     
@@ -39,4 +51,4 @@ if st.button("Generate Summary"):
           #    "length_input": length_input,
           #  })
           #  response = chatmodel.invoke(prompt)
-     st.write(response.text)
+     st.write(response.content)
