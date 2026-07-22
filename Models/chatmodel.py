@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 chatmodel = ChatGoogleGenerativeAI(
-    model="gemini-3.1-flash-lite",
-    thinking_level="minimal", 
+    model="gemini-3.6-flash",
+    thinking_level="high", 
     max_output_tokens=1024,
     temperature=0.5
 )
